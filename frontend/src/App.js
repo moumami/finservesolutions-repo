@@ -7,60 +7,73 @@ const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [projects, setProjects] = useState([]);
   const [blogPosts, setBlogPosts] = useState([]);
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [contactForm, setContactForm] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [contactStatus, setContactStatus] = useState('');
 
-  // Simulated data - will be replaced with backend calls
-  const mockProjects = [
-    {
-      id: 1,
-      title: "Cybersecurity Platform",
-      description: "Advanced threat detection system with AI-powered analysis",
-      tech: ["React", "Python", "TensorFlow", "AWS"],
-      image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwxfHxjeWJlcnNlY3VyaXR5fGVufDB8fHxibGFja3wxNzUyNDA4ODE4fDA&ixlib=rb-4.1.0&q=85"
-    },
-    {
-      id: 2,
-      title: "Cloud Infrastructure",
-      description: "Scalable microservices architecture with auto-scaling capabilities",
-      tech: ["Docker", "Kubernetes", "Node.js", "MongoDB"],
-      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzZ8MHwxfHNlYXJjaHwzfHx0ZWNobm9sb2d5fGVufDB8fHxibGFja3wxNzUyNDA4ODEwfDA&ixlib=rb-4.1.0&q=85"
-    },
-    {
-      id: 3,
-      title: "AI-Powered Analytics",
-      description: "Real-time data processing and predictive analytics dashboard",
-      tech: ["Python", "FastAPI", "TensorFlow", "React"],
-      image: "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwyfHxjeWJlcnNlY3VyaXR5fGVufDB8fHxibGFja3wxNzUyNDA4ODE4fDA&ixlib=rb-4.1.0&q=85"
-    }
-  ];
+  const API_BASE_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
 
-  const mockBlogPosts = [
-    {
-      id: 1,
-      title: "The Future of Cybersecurity in 2025",
-      excerpt: "Exploring emerging threats and cutting-edge protection strategies",
-      date: "2025-03-15",
-      readTime: "5 min read"
-    },
-    {
-      id: 2,
-      title: "Microservices Architecture Best Practices",
-      excerpt: "Building scalable and maintainable distributed systems",
-      date: "2025-03-12",
-      readTime: "8 min read"
-    },
-    {
-      id: 3,
-      title: "AI Integration in Modern Web Applications",
-      excerpt: "Practical approaches to embedding machine learning in your apps",
-      date: "2025-03-10",
-      readTime: "6 min read"
-    }
-  ];
-
+  // Fetch data from backend APIs
   useEffect(() => {
-    setProjects(mockProjects);
-    setBlogPosts(mockBlogPosts);
-  }, []);
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        
+        // Fetch projects
+        const projectsResponse = await fetch(`${API_BASE_URL}/api/projects`);
+        if (projectsResponse.ok) {
+          const projectsData = await projectsResponse.json();
+          setProjects(projectsData);
+        }
+
+        // Fetch blog posts
+        const blogResponse = await fetch(`${API_BASE_URL}/api/blog`);
+        if (blogResponse.ok) {
+          const blogData = await blogResponse.json();
+          setBlogPosts(blogData);
+        }
+
+        // Fetch services
+        const servicesResponse = await fetch(`${API_BASE_URL}/api/services`);
+        if (servicesResponse.ok) {
+          const servicesData = await servicesResponse.json();
+          setServices(servicesData);
+        }
+
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        // Fallback to mock data if API fails
+        setProjects([
+          {
+            id: "1",
+            title: "Cybersecurity Platform",
+            description: "Advanced threat detection system with AI-powered analysis",
+            tech: ["React", "Python", "TensorFlow", "AWS"],
+            image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwxfHxjeWJlcnNlY3VyaXR5fGVufDB8fHxibGFja3wxNzUyNDA4ODE4fDA&ixlib=rb-4.1.0&q=85"
+          }
+        ]);
+        setBlogPosts([
+          {
+            id: "1",
+            title: "The Future of Cybersecurity in 2025",
+            excerpt: "Exploring emerging threats and cutting-edge protection strategies",
+            date: "2025-03-15",
+            read_time: "5 min read"
+          }
+        ]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [API_BASE_URL]);
 
   const services = [
     {
