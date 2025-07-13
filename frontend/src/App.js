@@ -528,7 +528,12 @@ const App = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 border-t border-gray-800 py-12">
+      <footer className="bg-gray-900 border-t border-gray-800 py-12 relative">
+        {/* Instance Indicator */}
+        <div className="absolute top-4 right-4 bg-blue-500/20 border border-blue-500/30 px-3 py-1 rounded-full text-xs text-blue-400 font-mono">
+          📡 {INSTANCE_ID}
+        </div>
+        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="col-span-1 md:col-span-2">
