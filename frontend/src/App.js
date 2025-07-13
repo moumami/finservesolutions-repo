@@ -318,7 +318,17 @@ const App = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project) => (
+            {loading ? (
+              // Loading skeleton
+              [1, 2, 3].map((i) => (
+                <div key={i} className="bg-gray-800/50 rounded-xl p-6 animate-pulse">
+                  <div className="w-full h-48 bg-gray-700 rounded mb-4"></div>
+                  <div className="h-6 bg-gray-700 rounded mb-2"></div>
+                  <div className="h-4 bg-gray-700 rounded"></div>
+                </div>
+              ))
+            ) : (
+              projects.map((project) => (
               <div 
                 key={project.id}
                 className="group bg-gray-800/50 backdrop-blur-sm rounded-xl overflow-hidden hover:bg-gray-800/80 transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-2xl border border-gray-700 hover:border-blue-500/50"
