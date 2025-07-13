@@ -572,6 +572,7 @@ const App = () => {
 
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
             <p>&copy; 2025 FinServeSolutions. Tous droits réservés.</p>
+            <p className="text-xs mt-2 text-gray-500">Servi depuis: {INSTANCE_ID}</p>
           </div>
         </div>
       </footer>
