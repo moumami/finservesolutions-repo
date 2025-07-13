@@ -7,6 +7,9 @@ import uvicorn
 from datetime import datetime
 import uuid
 
+# Instance identification
+INSTANCE_ID = os.environ.get('INSTANCE_ID', 'Backend Dev Instance')
+
 app = FastAPI(title="FinServeSolutions API", version="1.0.0")
 
 # CORS middleware
