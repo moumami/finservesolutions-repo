@@ -390,28 +390,29 @@ const App = () => {
               ))
             ) : (
               blogPosts.map((post) => (
-              <article 
-                key={post.id}
-                className="group bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 hover:bg-gray-800/80 transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-2xl border border-gray-700 hover:border-blue-500/50 cursor-pointer"
-              >
-                <div className="flex items-center text-sm text-gray-500 mb-3">
-                  <span>{post.date}</span>
-                  <span className="mx-2">•</span>
-                  <span>{post.readTime}</span>
-                </div>
-                <h3 className="text-xl font-bold mb-3 text-white group-hover:text-blue-400 transition-colors duration-300">
-                  {post.title}
-                </h3>
-                <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
-                  {post.excerpt}
-                </p>
-                <div className="mt-4">
-                  <span className="text-blue-400 text-sm font-semibold group-hover:text-blue-300 transition-colors duration-300">
-                    Lire la suite →
-                  </span>
-                </div>
-              </article>
-            ))}
+                <article 
+                  key={post.id}
+                  className="group bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 hover:bg-gray-800/80 transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-2xl border border-gray-700 hover:border-blue-500/50 cursor-pointer"
+                >
+                  <div className="flex items-center text-sm text-gray-500 mb-3">
+                    <span>{post.date}</span>
+                    <span className="mx-2">•</span>
+                    <span>{post.read_time}</span>
+                  </div>
+                  <h3 className="text-xl font-bold mb-3 text-white group-hover:text-blue-400 transition-colors duration-300">
+                    {post.title}
+                  </h3>
+                  <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+                    {post.excerpt}
+                  </p>
+                  <div className="mt-4">
+                    <span className="text-blue-400 text-sm font-semibold group-hover:text-blue-300 transition-colors duration-300">
+                      Lire la suite →
+                    </span>
+                  </div>
+                </article>
+              ))
+            )}
           </div>
         </div>
       </section>
