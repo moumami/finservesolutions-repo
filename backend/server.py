@@ -239,7 +239,8 @@ async def get_stats():
         "years_experience": 10,
         "clients_served": 150,
         "uptime_percentage": 99.9,
-        "response_time_ms": 45
+        "response_time_ms": 45,
+        "instance_id": INSTANCE_ID
     }
 
 # Error handlers
