@@ -464,34 +464,62 @@ const App = () => {
             </div>
 
             {/* Contact Form */}
-            <form className="space-y-6">
+            <form onSubmit={handleContactSubmit} className="space-y-6">
+              {contactStatus === 'success' && (
+                <div className="bg-green-500/20 border border-green-500 text-green-400 px-4 py-3 rounded-lg">
+                  ✅ Message envoyé avec succès ! Nous vous répondrons bientôt.
+                </div>
+              )}
+              {contactStatus === 'error' && (
+                <div className="bg-red-500/20 border border-red-500 text-red-400 px-4 py-3 rounded-lg">
+                  ❌ Erreur lors de l'envoi. Veuillez réessayer.
+                </div>
+              )}
+              
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <input
                   type="text"
+                  name="name"
+                  value={contactForm.name}
+                  onChange={handleInputChange}
                   placeholder="Nom"
+                  required
                   className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-300"
                 />
                 <input
                   type="email"
+                  name="email"
+                  value={contactForm.email}
+                  onChange={handleInputChange}
                   placeholder="Email"
+                  required
                   className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-300"
                 />
               </div>
               <input
                 type="text"
+                name="subject"
+                value={contactForm.subject}
+                onChange={handleInputChange}
                 placeholder="Sujet"
+                required
                 className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-300"
               />
               <textarea
                 rows="6"
+                name="message"
+                value={contactForm.message}
+                onChange={handleInputChange}
                 placeholder="Votre message"
+                required
                 className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-300 resize-none"
               ></textarea>
               <button
                 type="submit"
-                className="w-full px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                disabled={contactStatus === 'sending'}
+                className="w-full px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Envoyer le message
+                {contactStatus === 'sending' ? '📤 Envoi en cours...' : 'Envoyer le message'}
               </button>
             </form>
           </div>
