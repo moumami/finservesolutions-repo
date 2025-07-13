@@ -277,7 +277,7 @@ const App = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {services.map((service, index) => (
+            {(services.length > 0 ? services : servicesData).map((service, index) => (
               <div 
                 key={index}
                 className="group bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 hover:bg-gray-800/80 transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-2xl border border-gray-700 hover:border-blue-500/50"
