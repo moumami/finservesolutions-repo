@@ -18,6 +18,7 @@ const App = () => {
   const [contactStatus, setContactStatus] = useState('');
 
   const API_BASE_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
+  const INSTANCE_ID = process.env.REACT_APP_INSTANCE_ID || 'Dev Instance';
 
   // Fetch data from backend APIs
   useEffect(() => {
