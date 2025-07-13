@@ -292,7 +292,7 @@ const App = () => {
                   {service.description}
                 </p>
                 <ul className="space-y-2">
-                  {service.features.map((feature, featureIndex) => (
+                  {service.features && service.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="text-sm text-gray-500 flex items-center">
                       <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></span>
                       {feature}
