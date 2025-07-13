@@ -75,7 +75,44 @@ const App = () => {
     fetchData();
   }, [API_BASE_URL]);
 
-  const services = [
+  // Handle contact form submission
+  const handleContactSubmit = async (e) => {
+    e.preventDefault();
+    setContactStatus('sending');
+    
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(contactForm)
+      });
+
+      if (response.ok) {
+        setContactStatus('success');
+        setContactForm({ name: '', email: '', subject: '', message: '' });
+        setTimeout(() => setContactStatus(''), 3000);
+      } else {
+        setContactStatus('error');
+        setTimeout(() => setContactStatus(''), 3000);
+      }
+    } catch (error) {
+      console.error('Error sending contact message:', error);
+      setContactStatus('error');
+      setTimeout(() => setContactStatus(''), 3000);
+    }
+  };
+
+  // Handle form input changes
+  const handleInputChange = (e) => {
+    setContactForm({
+      ...contactForm,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const servicesData = [
     {
       icon: "🛡️",
       title: "Cybersécurité",
