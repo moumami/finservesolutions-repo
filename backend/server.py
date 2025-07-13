@@ -109,7 +109,12 @@ contact_messages_db = []
 # Health check endpoint
 @app.get("/api/health")
 async def health_check():
-    return {"status": "healthy", "service": "FinServeSolutions API"}
+    return {
+        "status": "healthy", 
+        "service": "FinServeSolutions API",
+        "instance_id": INSTANCE_ID,
+        "timestamp": datetime.now().isoformat()
+    }
 
 # Projects endpoints
 @app.get("/api/projects", response_model=List[dict])
